@@ -1,3 +1,6 @@
+
+pip install streamlit reportlab
+streamlit run app.py
 import { useState } from "react";
 
 // ─── Palette ───────────────────────────────────────────────────────────────
