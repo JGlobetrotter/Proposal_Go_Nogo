@@ -20,7 +20,7 @@ const C = {
   grey3:       "#3a3a3a",   // inactive borders
 };
 
-// ─── Sections config ───────────────────────────────────────────────────────
+# // ─── Sections config ───────────────────────────────────────────────────────
 const SECTIONS = [
   {
     key: "strategic_fit", label: "Strategic Fit", icon: "◎",
@@ -112,7 +112,7 @@ function buildCLI(meta, scores) {
   --output "${(meta.title || "report").replace(/\s+/g, "_").toLowerCase()}_report.pdf"`;
 }
 
-// ─── Sub-components ────────────────────────────────────────────────────────
+# // ─── Sub-components ────────────────────────────────────────────────────────
 function ScoreBar({ pct, height = 4 }) {
   const fill = pct >= 0.7 ? C.yellow : pct >= 0.5 ? `${C.yellow}99` : C.grey2;
   return (
@@ -175,7 +175,7 @@ function Label({ children, extra }) {
   );
 }
 
-// ─── App ───────────────────────────────────────────────────────────────────
+# // ─── App ───────────────────────────────────────────────────────────────────
 export default function GoNoGoIntake() {
   const [meta, setMeta]           = useState({ org:"", title:"", donor:"", deadline:"", evaluator:"", notes:"" });
   const [scores, setScores]       = useState(initScores);
