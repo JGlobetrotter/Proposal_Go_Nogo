@@ -1,5 +1,9 @@
 
-pip install streamlit 
+"""
+logicgenerator.py  –  Proposal Go/No-Go Diagnostic
+Scoring logic, section definitions, and narrative generation.
+"""
+
 streamlit run app.py
 import { useState } from "react";
 
