@@ -3,7 +3,7 @@ pip install streamlit reportlab
 streamlit run app.py
 import { useState } from "react";
 
-// ─── Palette ───────────────────────────────────────────────────────────────
+# // ─── Palette ───────────────────────────────────────────────────────────────
 const C = {
   bg:          "#1a1a1a",   // near-black page background
   panel:       "#222222",   // panel / header background
