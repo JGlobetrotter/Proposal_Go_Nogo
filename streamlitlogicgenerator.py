@@ -1,5 +1,5 @@
 
-pip install streamlit reportlab
+pip install streamlit 
 streamlit run app.py
 import { useState } from "react";
 
