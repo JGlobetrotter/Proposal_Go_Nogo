@@ -16,7 +16,7 @@ import sys
 
 # ── Page config (must be first Streamlit call) ────────────────────────────────
 st.set_page_config(
-    page_title="Sustainability Supplier Readiness",
+    page_title="Proposal Go / No Go Tool",
     page_icon="🌍",
     layout="centered",
     initial_sidebar_state="collapsed",
@@ -175,7 +175,7 @@ h1, h2, h3 {
 # ════════════════════════════════════════════════
 #  PASSWORD GATE
 # ════════════════════════════════════════════════
-PASSWORD = "betastream"
+PASSWORD = "betaproposal"
 
 if "authenticated" not in st.session_state:
     st.session_state.authenticated = False
