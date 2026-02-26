@@ -27,7 +27,7 @@ if "authenticated" not in st.session_state:
 if not st.session_state.authenticated:
     st.markdown("""
     <div class="password-card">
-        <h1>🌱 Sustainability Supplier Diagnostic </h1>
+        <h1>🌱 Proposal Go / No Go Tool </h1>
         <p>Supplier Sustainability Readiness Tool — Beta</p>
     </div>
     """, unsafe_allow_html=True)
