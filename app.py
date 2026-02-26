@@ -7,6 +7,201 @@ from reportlab.lib.units import cm
 import io
 from datetime import datetime
 
+# experiment
+
+
+import streamlit as st
+import os
+import sys
+
+# ── Page config (must be first Streamlit call) ────────────────────────────────
+st.set_page_config(
+    page_title="Sustainability Supplier Readiness",
+    page_icon="🌍",
+    layout="centered",
+    initial_sidebar_state="collapsed",
+)
+
+# ── Custom CSS ─────────────────────────────────────────────────────────────────
+st.markdown("""
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+html, body, [class*="css"] {
+    font-family: 'DM Sans', sans-serif;
+}
+
+/* Background */
+.stApp {
+    background: #f4f1ec;
+}
+
+/* Hide default Streamlit chrome */
+#MainMenu, footer, header { visibility: hidden; }
+
+/* Password screen */
+.password-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 3rem 2.5rem;
+    max-width: 420px;
+    margin: 8vh auto 0;
+    box-shadow: 0 4px 32px rgba(0,0,0,0.08);
+    text-align: center;
+}
+.password-card h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2rem;
+    color: #1a1a2e;
+    margin-bottom: 0.25rem;
+}
+.password-card p {
+    color: #6b7280;
+    font-size: 0.92rem;
+    margin-bottom: 2rem;
+}
+
+/* Section headers */
+h1, h2, h3 {
+    font-family: 'DM Serif Display', serif !important;
+    color: #1a1a2e !important;
+}
+
+/* Metric cards */
+.metric-row {
+    display: flex;
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+.metric-card {
+    flex: 1;
+    background: #fff;
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+.metric-card .label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #9ca3af;
+    margin-bottom: 0.4rem;
+}
+.metric-card .value {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2rem;
+    color: #1a1a2e;
+    line-height: 1;
+}
+
+/* Band badge */
+.band-low    { background: #d1fae5; color: #065f46; }
+.band-medium { background: #fef3c7; color: #92400e; }
+.band-high   { background: #fee2e2; color: #991b1b; }
+.band-badge {
+    display: inline-block;
+    padding: 0.45rem 1.1rem;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+}
+
+/* Tag pills */
+.tag-pill {
+    display: inline-block;
+    background: #e0e7ff;
+    color: #3730a3;
+    border-radius: 999px;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.78rem;
+    font-weight: 500;
+    margin: 0.2rem 0.2rem 0.2rem 0;
+}
+
+/* Why list */
+.why-item {
+    background: #fff;
+    border-left: 3px solid #6366f1;
+    border-radius: 0 8px 8px 0;
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.6rem;
+    font-size: 0.93rem;
+    color: #374151;
+}
+
+/* Assumption box */
+.assumption-box {
+    background: #fff;
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    border: 1px solid #e5e7eb;
+    font-size: 0.88rem;
+    color: #4b5563;
+    margin-top: 0.5rem;
+}
+.assumption-box li { margin-bottom: 0.4rem; }
+
+/* Divider */
+.divider {
+    border: none;
+    border-top: 1px solid #e5e7eb;
+    margin: 2rem 0;
+}
+
+/* Selectbox label override */
+.stSelectbox label {
+    font-weight: 500 !important;
+    color: #374151 !important;
+}
+
+/* Button */
+.stButton > button {
+    background: #1a1a2e !important;
+    color: #fff !important;
+    border: none !important;
+    border-radius: 8px !important;
+    padding: 0.6rem 2rem !important;
+    font-family: 'DM Sans', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 0.95rem !important;
+    transition: opacity 0.2s !important;
+}
+.stButton > button:hover { opacity: 0.85 !important; }
+</style>
+""", unsafe_allow_html=True)
+
+# ════════════════════════════════════════════════
+#  PASSWORD GATE
+# ════════════════════════════════════════════════
+PASSWORD = "betastream"
+
+if "authenticated" not in st.session_state:
+    st.session_state.authenticated = False
+
+if not st.session_state.authenticated:
+    st.markdown("""
+    <div class="password-card">
+        <h1>🌱 Sustainability Supplier Diagnostic </h1>
+        <p>Supplier Sustainability Readiness Tool — Beta</p>
+    </div>
+    """, unsafe_allow_html=True)
+    pwd = st.text_input("Enter access password", type="password", label_visibility="collapsed",
+                        placeholder="Enter password…")
+    col1, col2, col3 = st.columns([1, 1, 1])
+    with col2:
+        if st.button("Enter →", use_container_width=True):
+            if pwd == PASSWORD:
+                st.session_state.authenticated = True
+                st.rerun()
+            else:
+                st.error("Incorrect password.")
+    st.stop()
+
+
+# end of experiment
+
 # ── Page config ────────────────────────────────────────────────────────────
 st.set_page_config(page_title="Proposal Go / No-Go", layout="wide", page_icon="📋")
 
