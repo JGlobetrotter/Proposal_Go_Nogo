@@ -8,19 +8,7 @@ What It Does
 The tool walks evaluators through focused questions across  key dimensions /  categories. As you answer, it calculates a live score and verdict — and lets you export the full assessment as a PDF report.
 
 
-Assessment Framework: Each of the four dimensions is scored on a 1–5 scale across questions
-
-Dimension Definitions :
-◎	Strategic Fit	== Mission alignment, program fit, donor relationships, long-term goals
-⬡	  Organizational == Capacity	Staff expertise, preparation time, geographic presence, past performance
-◈	Financial Viability ==	Budget adequacy, overhead rates, cash flow, reporting feasibility
-△	Risk Assessment ==	Political/security context, scope creep, compliance, reputational exposure
-
-
-Verdict Thresholds / Scoring :
-≥ 70%	== GO /	Proceed with proposal development
-50–69% ==	CAUTION	/ Address weak areas before committing
-< 50% ==	NO-GO /	Do not pursue this opportunity
+Assessment Framework: Each of the four dimensions /criteria is scored on a 1–5 scale across questions
 
 Additional Features
     Password-protected access (beta)
