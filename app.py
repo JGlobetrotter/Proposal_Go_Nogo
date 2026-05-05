@@ -7,47 +7,99 @@ from reportlab.lib.units import cm
 import io
 from datetime import datetime
 
-# experiment
+# ── Page config (must be the very first st.* call) ────────────────────────────
+st.set_page_config(page_title="Proposal Go / No-Go", layout="wide", page_icon="📋")
 
+# ── Secrets ───────────────────────────────────────────────────────────────────
+try:
+    APP_PASSWORD = st.secrets["APP_PASSWORD"]
+except Exception:
+    APP_PASSWORD = "betastream"
 
-import streamlit as st
-import os
-import sys
+try:
+    BETA_EMAIL = st.secrets["BETA_EMAIL"]
+except Exception:
+    BETA_EMAIL = "hello@navisignal.app"
 
+# ── Init auth state ───────────────────────────────────────────────────────────
+if "authed" not in st.session_state:
+    st.session_state.authed = False
 
-
-# ════════════════════════════════════════════════
-#  PASSWORD GATE
-# ════════════════════════════════════════════════
-PASSWORD = "betaproposal"
-
-if "authenticated" not in st.session_state:
-    st.session_state.authenticated = False
-
-if not st.session_state.authenticated:
+# ═══════════════════════════════════════════════════════════════════════════════
+# PASSWORD GATE
+# ═══════════════════════════════════════════════════════════════════════════════
+if not st.session_state.authed:
     st.markdown("""
-    <div class="password-card">
-        <h1>🌱 Proposal Go / No Go Tool </h1>
-        <p>Supplier Sustainability Readiness Tool — Beta</p>
-    </div>
+    <style>
+      body, .stApp { background-color: #09090b; }
+      .stButton > button {
+        background: #3b82f6 !important; color: #fff !important; font-weight: 700;
+        border: none; border-radius: 6px; font-size: 15px;
+      }
+      .stButton > button:hover { background: #2563eb !important; }
+      .stTextInput > div > div > input {
+        background: #18181b; border: 1px solid #3f3f46;
+        color: #fafafa; border-radius: 6px; padding: 10px 14px;
+      }
+    </style>
     """, unsafe_allow_html=True)
-    pwd = st.text_input("Enter access password", type="password", label_visibility="collapsed",
-                        placeholder="Enter password…")
-    col1, col2, col3 = st.columns([1, 1, 1])
-    with col2:
+
+    st.markdown('<div style="height:8vh;"></div>', unsafe_allow_html=True)
+
+    _, pw_col, _ = st.columns([1, 2.2, 1])
+
+    with pw_col:
+        st.markdown("""
+        <div style="background:#111113;border:1px solid #27272a;border-radius:10px;
+                    padding:40px 36px 28px;text-align:center;">
+          <div style="margin-bottom:20px;">
+            <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="22" cy="22" r="20" stroke="#3b82f6" stroke-width="2" opacity="0.3"/>
+              <circle cx="22" cy="22" r="3" fill="#3b82f6"/>
+              <line x1="22" y1="2" x2="22" y2="10" stroke="#c9a84c" stroke-width="2" stroke-linecap="round"/>
+              <line x1="22" y1="34" x2="22" y2="42" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+              <line x1="2" y1="22" x2="10" y2="22" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+              <line x1="34" y1="22" x2="42" y2="22" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+            </svg>
+          </div>
+          <div style="font-family:'DM Serif Display',Georgia,serif;font-size:24px;
+                      color:#fafafa;margin-bottom:6px;">
+            Supplier Readiness
+          </div>
+          <div style="font-size:12px;color:#71717a;line-height:1.6;margin-bottom:28px;">
+            CSRD-aligned diagnostic for SME and supply chain suppliers<br>
+            <em>Beta access only</em>
+          </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        pwd = st.text_input(
+            "",
+            type="password",
+            placeholder="Enter access password…",
+            label_visibility="collapsed",
+        )
+
         if st.button("Enter →", use_container_width=True):
-            if pwd == PASSWORD:
-                st.session_state.authenticated = True
+            if pwd == APP_PASSWORD:
+                st.session_state.authed = True
                 st.rerun()
             else:
-                st.error("Incorrect password.")
+                st.error("Incorrect password. Contact your administrator.")
+
+        st.markdown(
+            f"""
+            <div style="text-align:center;margin-top:16px;font-size:12px;color:#71717a;">
+              <a href="mailto:{BETA_EMAIL}?subject=Beta access request"
+                 style="color:#3b82f6;font-weight:600;text-decoration:none;">
+                Request beta access
+              </a>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
     st.stop()
-
-
-# end of experiment
-
-# ── Page config ────────────────────────────────────────────────────────────
-st.set_page_config(page_title="Proposal Go / No-Go", layout="wide", page_icon="📋")
 
 # ── Dark + yellow theme ─────────────────────────────────────────────────────
 st.markdown("""
