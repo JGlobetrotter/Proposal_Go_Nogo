@@ -67,7 +67,7 @@ if not st.session_state.authed:
             Proposal Go No-Go
           </div>
           <div style="font-size:12px;color:#71717a;line-height:1.6;margin-bottom:28px;">
-            CSRD-aligned diagnostic for SME and supply chain suppliers<br>
+            For International Development and Humanitarian Practitioners <br>
             <em>Beta access only</em>
           </div>
         </div>
