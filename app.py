@@ -14,7 +14,7 @@ st.set_page_config(page_title="Proposal Go / No-Go", layout="wide", page_icon="ð
 try:
     APP_PASSWORD = st.secrets["APP_PASSWORD"]
 except Exception:
-    APP_PASSWORD = "betastream"
+    APP_PASSWORD = "betaproposal"
 
 try:
     BETA_EMAIL = st.secrets["BETA_EMAIL"]
@@ -64,7 +64,7 @@ if not st.session_state.authed:
           </div>
           <div style="font-family:'DM Serif Display',Georgia,serif;font-size:24px;
                       color:#fafafa;margin-bottom:6px;">
-            Supplier Readiness
+            Proposal Go No-Go
           </div>
           <div style="font-size:12px;color:#71717a;line-height:1.6;margin-bottom:28px;">
             CSRD-aligned diagnostic for SME and supply chain suppliers<br>
