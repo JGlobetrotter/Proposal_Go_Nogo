@@ -175,9 +175,26 @@ for sec in SECTIONS:
         if k not in st.session_state:
             st.session_state[k] = 3
 
-# ── Header ──────────────────────────────────────────────────────────────────
-st.markdown("# 📋 Proposal Go / No-Go Assessment")
-st.markdown("---")
+# ═══════════════════════════════════════════════════════════════════════════════
+# HEADER
+# ═══════════════════════════════════════════════════════════════════════════════
+st.markdown("""
+<div style="border-bottom:1px solid #27272a;padding:14px 0 14px;
+            display:flex;align-items:center;justify-content:space-between;
+            margin-bottom:4px;">
+  <div style="font-family:'DM Serif Display',Georgia,serif;font-size:18px;color:#fafafa;">
+    Navisignal
+    <span style="font-family:'DM Sans',sans-serif;font-size:10px;font-weight:600;
+                 letter-spacing:0.1em;text-transform:uppercase;color:#c9a84c;
+                 border:1px solid #c9a84c;border-radius:9999px;
+                 padding:2px 8px;margin-left:8px;">Beta</span>
+  </div>
+  <div style="text-align:right;">
+    <div style="font-family:'DM Serif Display',Georgia,serif;font-size:15px;color:#fafafa;">Proposal Go / No-Go</div>
+    <div style="font-size:11px;color:#71717a;margin-top:1px;">For International Development &amp; Humanitarian Practitioners</div>
+  </div>
+</div>
+""", unsafe_allow_html=True)
 
 left, right = st.columns([52, 48])
 
